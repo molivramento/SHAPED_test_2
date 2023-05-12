@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: celery
+    command: celery -A SHAPED_test_2.celery:app worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - celery
