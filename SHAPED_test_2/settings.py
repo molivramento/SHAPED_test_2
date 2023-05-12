@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n16&$9ir@e_z(l7#d*xryr=!_+@l8k(x2+kyx0z2l)$=&+j!^h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django_filters',
 
     # Internal apps
-    'app.patients'
+    'app.patients',
+    'app.exams'
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# TODO: Alter PAGE_SIZE
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3
 }
+
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
