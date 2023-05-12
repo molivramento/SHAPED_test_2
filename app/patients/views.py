@@ -1,3 +1,5 @@
+from celery.result import AsyncResult
+
 from app.patients.models import Patient
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -21,8 +23,15 @@ class PatientViewSet(viewsets.ModelViewSet):
     ordering = ['name']
 
     def create(self, request, *args, **kwargs):
-        patient_id = save_patient.delay(request.data)
-        patient = Patient.objects.get(id=patient_id.get())
+        result = save_patient.delay(request.data)
+        task_id = result.task_id
+        patient_id = AsyncResult(task_id).get()
+        patient = Patient.objects.get(id=patient_id)
         serializer = self.get_serializer(patient)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        # patient_id = save_patient.delay(request.data)
+        # patient = Patient.objects.get(id=patient_id.get())
+        # serializer = self.get_serializer(patient)
+        # headers = self.get_success_headers(serializer.data)
+        # return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
