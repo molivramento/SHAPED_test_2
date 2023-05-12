@@ -9,6 +9,8 @@ packages = [{include = "shaped_test_2"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^4.2.1"
+djangorestframework = "^3.14.0"
+django-filter = "^23.2"
 
 
 [build-system]
