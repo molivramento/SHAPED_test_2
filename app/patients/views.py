@@ -23,15 +23,8 @@ class PatientViewSet(viewsets.ModelViewSet):
     ordering = ['name']
 
     def create(self, request, *args, **kwargs):
-        result = save_patient.delay(request.data)
-        task_id = result.task_id
-        patient_id = AsyncResult(task_id).get()
-        patient = Patient.objects.get(id=patient_id)
+        patient_id = save_patient.delay(request.data)
+        patient = Patient.objects.get(id=patient_id.get())
         serializer = self.get_serializer(patient)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-        # patient_id = save_patient.delay(request.data)
-        # patient = Patient.objects.get(id=patient_id.get())
-        # serializer = self.get_serializer(patient)
-        # headers = self.get_success_headers(serializer.data)
-        # return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
