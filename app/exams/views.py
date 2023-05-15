@@ -1,11 +1,11 @@
 from app.exams.models import Exam
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from SHAPED_test_2.celery import app as celery_app
+from celery import shared_task
 from app.exams.serializers import ExamSerializer, ExamFilter
 
 
-@celery_app.task
+@shared_task
 def save_exam(data):
     serializer = ExamSerializer(data=data)
     serializer.is_valid(raise_exception=True)

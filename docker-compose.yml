@@ -7,28 +7,28 @@ services:
     ports:
       - "6379:6379"
 
-  celery:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: celery
-    command: celery -A SHAPED_test_2.celery:app worker --loglevel=info
-    volumes:
-      - .:/code
-    depends_on:
-      - redis
-
-  django:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: django
-    command: >
-      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-    depends_on:
-      - redis
-      - celery
+#  celery:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: celery
+#    command: celery -A SHAPED_test_2.celery:app worker --loglevel=info
+#    volumes:
+#      - .:/code
+#    depends_on:
+#      - redis
+#
+#  django:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: django
+#    command: >
+#      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#    volumes:
+#      - .:/code
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - redis
+#      - celery
