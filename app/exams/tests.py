@@ -42,3 +42,10 @@ class ExamTest(TestCase):
         self.assertEqual(len(response.data['results']), 2)
         self.assertEqual(response.data['results'][0]['height'], 1.80)
 
+    def test_create_exam(self):
+        data = {"patient": 1, "date": "2020-01-01", "professional": "Dr. João", "weight": 80, "height": 1.80}
+        response = self.client.post(reverse('exam-list'), data)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Exam.objects.count(), 3)
+        self.assertEqual(Exam.objects.get(id=3).professional, 'Dr. João')
+

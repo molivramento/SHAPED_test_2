@@ -35,3 +35,10 @@ class PatientTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data['results']), 1)
         self.assertEqual(response.data['results'][0]['name'], 'Beltrano')
+
+    def test_create_patient(self):
+        data = {"name": "João", "birth_date": "2000-01-01", "address": "Rua do João, 9"}
+        response = self.client.post(reverse('patient-list'), data)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Patient.objects.count(), 5)
+        self.assertEqual(Patient.objects.get(id=5).name, 'João')
