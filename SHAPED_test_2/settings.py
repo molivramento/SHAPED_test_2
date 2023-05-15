@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # External apps
     'rest_framework',
     'django_filters',
+    'drf_spectacular',
 
     # Internal apps
     'app.patients',
@@ -143,6 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'PAGE_SIZE': 3
 }
 
@@ -151,6 +153,13 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_TIMEZONE = 'America/Recife'
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'SHAPED test 2',
+    'DESCRIPTION': 'Docs API SHAPED_test_2',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
 
 if DEBUG:
     CELERY_TASK_ALWAYS_EAGER = True
