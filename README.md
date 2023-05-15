@@ -58,7 +58,7 @@ python manage.py test
 ```shell
 http://localhost:8000/api/docs/
 ```
-
+ 
 ## Conclusão
 
 - Fiz uma pequena alteração no campo "idade" do paciente, adicionei um campo "data de nascimento" e uma função que retorne a idade
