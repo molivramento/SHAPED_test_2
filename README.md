@@ -2,6 +2,17 @@
 
 Projeto de teste para a empresa SHAPED.
 
+## Funcionalidades
+
+- Cadastro de pacientes
+- Cadastro de exames
+- Filtros Pacientes: nome (icontains), idade (gte, lte)
+- Filtros Exames: profissional (icontains), pacientes (id), peso (gte, lte), altura (gte, lte)
+- Metodo POST de pacientes e exames executados por celery
+- redis como broker rodando em um container docker
+- Testes unitários
+- Documentação da API
+
 ## Descrição
 
 Desenvolver uma API REST de cadastro de pacientes e exames.
@@ -20,37 +31,38 @@ Desenvolver uma API REST de cadastro de pacientes e exames.
 ```shell
 docker-compose up
 ```
-3. Instale as dependências:
+3. Inicie um worker celery
+```shell
+celery -A SHAPED_test_2 worker --loglevel=info
+```
+4. Instale as dependências:
 ```shell
 pip install -r requirements.txt
 ```
-4. Inicie Django:
+5. Inicie Django:
 ```shell
 python manage.py runserver
 ```
-5. Inicie migrations:
+6. Inicie migrations:
 ```shell
 python manage.py makemigrations
 ```
 ```shell
 python manage.py migrate
 ```
-6. Acesse a aplicação em seu navegador através do endereço:
-```shell
-http://localhost:8000
-```
 7. Execute os testes:
-```shell
+```shells
 python manage.py test
+```
+8. Acesse a aplicação em seu navegador através do endereço:
+```shell
+http://localhost:8000/api/docs/
 ```
 
 ## Conclusão
 
-- Fiz uma pequena alteração no campo "idade" do paciente, adicionei um campo "data_nascimento" e uma função que retorne a idade
+- Fiz uma pequena alteração no campo "idade" do paciente, adicionei um campo "data de nascimento" e uma função que retorne a idade
 o serializer fez com que os filtros ficassem um pouco mais complexo, porém isso fará com que o campo "idade" não fique desatualizado.
-- Enfretei um problema com pycharm, sempre que criava uma branch ao retornar para principal para fazer o merge o pycharm simplesmente
-apagava fazia desaparecer alguns arquivos e desconfigurava o versionamento, não sei se é por utilizar a versão mais recente
-ou devido a algum erro no git ou proprio windows ou todas essas combinações, acredito que em Linux deve funcionar bem.
-- Ao longo do tempo vou adicionando documentação da API, mais filtros, mais testes e correção de bugs (como o teste de criação),
-assim como exemplo de como utilizar a API.
+- Para todas as etapas deveria ser adicionado uma branch, porém windows ou pycharm ou git estavam com problemas para manipular banchs,
+esse problema foi resolvido configurando ambiente de desenvolvimento com Linux Mint.
 - Agradeço a oportunidade e espero que gostem do projeto.
