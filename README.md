@@ -20,22 +20,26 @@ Desenvolver uma API REST de cadastro de pacientes e exames.
 ```shell
 docker-compose up
 ```
-3. Run Django:
+3. Instale as dependências:
+```shell
+pip install -r requirements.txt
+```
+4. Inicie Django:
 ```shell
 python manage.py runserver
 ```
-4. Run migrations:
+5. Inicie migrations:
 ```shell
 python manage.py makemigrations
 ```
 ```shell
 python manage.py migrate
 ```
-5. Acesse a aplicação em seu navegador através do endereço:
+6. Acesse a aplicação em seu navegador através do endereço:
 ```shell
 http://localhost:8000
 ```
-6. Execute os testes:
+7. Execute os testes:
 ```shell
 python manage.py test
 ```
