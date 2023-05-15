@@ -16,14 +16,11 @@ Desenvolver uma API REST de cadastro de pacientes e exames.
 ## Instalação
 
 1. Clone este repositório em sua máquina local.
-2. Execute o Dockerfile:
-```shell
-docker build -t shaped_test .
-```
-3. Execute o docker-compose:
+2. Execute o docker-compose:
 ```shell
 docker-compose up
 ```
+3. 
 4. Acesse a aplicação em seu navegador através do endereço:
 ```shell
 http://localhost:8000
