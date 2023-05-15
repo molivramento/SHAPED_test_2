@@ -20,18 +20,26 @@ Desenvolver uma API REST de cadastro de pacientes e exames.
 ```shell
 docker-compose up
 ```
-3. 
-4. Acesse a aplicação em seu navegador através do endereço:
+3. Run Django:
+```shell
+python manage.py runserver
+```
+4. Run migrations:
+```shell
+python manage.py makemigrations
+```
+```shell
+python manage.py migrate
+```
+5. Acesse a aplicação em seu navegador através do endereço:
 ```shell
 http://localhost:8000
 ```
-5. Execute os testes:
+6. Execute os testes:
 ```shell
-python manage.py app.patient.tests
+python manage.py test
 ```
-```shell
-python manage.py app.exam.tests
-```
+
 ## Conclusão
 
 - Fiz uma pequena alteração no campo "idade" do paciente, adicionei um campo "data_nascimento" e uma função que retorne a idade
@@ -40,8 +48,6 @@ o serializer fez com que os filtros ficassem um pouco mais complexo, porém isso
 devido ao celery funcionar de forma asincrona faz com que os testes de criação retornem em erro, mesmo com os dados
 sendo inseridos no banco de dados, isso ocorre pois enquanto o celery ainda está registrandos os dados no banco dedados,
 o tente tenta buscar o usuário que ainda não criado, gerando erros.
-- Notavelmente o ambiente de desenvolvimento influenciou drasticamente no tempo, visto que maior parte do tempo foi configurando
-o ambiente, e não desenvolvendo o projeto em si, windows, wsl e docker não são amigos, e isso me custou muito tempo.
 - Enfretei um problema com pycharm, sempre que criava uma branch ao retornar para principal para fazer o merge o pycharm simplesmente
 apagava fazia desaparecer alguns arquivos e desconfigurava o versionamento, não sei se é por utilizar a versão mais recente
 ou devido a algum erro no git ou proprio windows ou todas essas combinações, acredito que em Linux deve funcionar bem.
